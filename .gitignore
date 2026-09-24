@@ -1,0 +1,23 @@
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# Dependencies
+node_modules/
+backend/__pycache__/
+*/__pycache__/
+*.pyc
+
+# Build outputs
+frontend/dist/
+frontend/tsconfig.tsbuildinfo
+.pytest_cache/
+
+# IDE and OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,13 @@
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+tsconfig.tsbuildinfo
