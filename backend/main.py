@@ -1,4 +1,5 @@
 import asyncio
+import os
 from datetime import datetime, timezone
 from fastapi import FastAPI, Query, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
@@ -44,7 +45,8 @@ app = FastAPI(
     description="Civic intelligence operations platform REST & streaming API",
 )
 
-cors_origins = [o.strip() for o in settings.ALLOWED_ORIGINS.split(",") if o.strip()] or ["*"]
+raw_origins = getattr(settings, "ALLOWED_ORIGINS", os.getenv("ALLOWED_ORIGINS", "*"))
+cors_origins = [o.strip() for o in raw_origins.split(",") if o.strip()] or ["*"]
 
 app.add_middleware(
     CORSMiddleware,

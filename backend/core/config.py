@@ -50,5 +50,8 @@ class Settings:
     # Operational Mode: "LIVE", "DEMO", or "MIXED"
     DATA_MODE: str = os.getenv("DATA_MODE", "MIXED")
 
+    # CORS Allowed Origins (comma-separated or * for development)
+    ALLOWED_ORIGINS: str = os.getenv("ALLOWED_ORIGINS", "*")
+
 
 settings = Settings()
