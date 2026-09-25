@@ -80,12 +80,8 @@ def root():
     }
 
 
-@app.get("/health")
-def health_alias() -> dict[str, str]:
-    return health()
-
-
 @app.get("/api/health")
+@app.get("/health")
 def health() -> dict[str, str]:
     return {
         "status": "ok",
