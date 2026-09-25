@@ -44,9 +44,11 @@ app = FastAPI(
     description="Civic intelligence operations platform REST & streaming API",
 )
 
+cors_origins = [o.strip() for o in settings.ALLOWED_ORIGINS.split(",") if o.strip()] or ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -64,6 +66,21 @@ app.include_router(analytics_router)
 app.include_router(ai_router)
 app.include_router(sources_router)
 app.include_router(geocoding_router)
+
+
+@app.get("/")
+def root():
+    return {
+        "service": "CityPulse Command Center API",
+        "status": "online",
+        "docs": "/docs",
+        "health": "/api/health",
+    }
+
+
+@app.get("/health")
+def health_alias() -> dict[str, str]:
+    return health()
 
 
 @app.get("/api/health")
